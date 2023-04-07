@@ -216,6 +216,7 @@ namespace FormControll
             this.groupBoxA.TabIndex = 4;
             this.groupBoxA.TabStop = false;
             this.groupBoxA.Text = "地台板A";
+            this.groupBoxA.Enter += new System.EventHandler(this.groupBoxA_Enter);
             // 
             // label13
             // 

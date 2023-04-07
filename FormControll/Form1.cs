@@ -112,6 +112,8 @@ namespace FormControll
 
         private void DrawListView(ListView drawListView, List<ItemInfo> t, int board_length, int board_width, Panel panelView)
         {
+            panelView.Width = (int)(((decimal)panelView.Height / (decimal)board_width) * board_length);
+
             drawListView.Items.Clear();
             panelView.Controls.Clear();
             foreach (var item in t)
@@ -127,14 +129,28 @@ namespace FormControll
                 var draw_box_width = panelView.Height * ((decimal)item.Width / (decimal)board_width);
                 var draw_box_pointX = (int)((item.PointX / item.Length) * draw_box_length);
                 var draw_box_pointY = (int)((item.PointY / item.Width) * draw_box_width);
-                // 绘制
-                Panel newView = new Panel();
-                newView.BorderStyle = BorderStyle.FixedSingle;
+                var b_pointX = 0;
+                var b_pointY = 0;
 
-                newView.BackgroundImage = Image.FromFile("./Resources/box.png");
-                newView.BackgroundImageLayout = ImageLayout.Zoom;
-                newView.SetBounds(draw_box_pointX, draw_box_pointY, (int)draw_box_length, (int)draw_box_width);
-                panelView.Controls.Add(newView);
+                if (drawListView.Name.Equals("listViewA"))
+                {
+                    b_pointX = draw_box_pointX;
+                    b_pointY = panelView.Height - draw_box_pointY - (int)draw_box_width;
+                }
+                else
+                {
+                    b_pointX = panelView.Width - draw_box_pointX - (int)draw_box_length;
+                    b_pointY = draw_box_pointY;
+                }
+
+                // 绘制
+                Label txtBox = new Label();
+                txtBox.BorderStyle = BorderStyle.FixedSingle;
+                txtBox.Text = (t.IndexOf(item) + 1) + "";
+                txtBox.TextAlign = ContentAlignment.MiddleCenter;
+
+                txtBox.SetBounds(b_pointX, b_pointY, (int)draw_box_length, (int)draw_box_width);
+                panelView.Controls.Add(txtBox);
             }
         }
 
@@ -207,7 +223,7 @@ namespace FormControll
                 {
                     cur_y = cur_y + 20;
                     font = new XFont("华文宋体", 12, XFontStyle.Regular);
-                    gfx.DrawString((BList.IndexOf(item) + 1).ToString(), font, XBrushes.Black, new XRect(box_x + 10, cur_y, 60, 40), XStringFormats.TopLeft);
+                    gfx.DrawString((AList.IndexOf(item) + 1).ToString(), font, XBrushes.Black, new XRect(box_x + 10, cur_y, 60, 40), XStringFormats.TopLeft);
 
                     font = new XFont("华文宋体", 12, XFontStyle.Regular);
                     gfx.DrawString(item.CenterX.ToString(), font, XBrushes.Black, new XRect(point_x_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
@@ -286,6 +302,10 @@ namespace FormControll
         }
 
         private void boxWdith_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void groupBoxA_Enter(object sender, EventArgs e)
         {
         }
     }
