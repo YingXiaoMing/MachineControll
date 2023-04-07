@@ -40,10 +40,6 @@ namespace FormControll
             this.boxHeightText = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBoxA = new System.Windows.Forms.GroupBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.boardARight = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.boardABottom = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.boardALeft = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -63,10 +59,6 @@ namespace FormControll
             this.boardBRight = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.boardBBottom = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.boardBLeft = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.boardBTop = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -112,7 +104,7 @@ namespace FormControll
             this.boxWdith.Name = "boxWdith";
             this.boxWdith.Size = new System.Drawing.Size(100, 29);
             this.boxWdith.TabIndex = 2;
-            this.boxWdith.Text = "30";
+            this.boxWdith.TextChanged += new System.EventHandler(this.boxWdith_TextChanged);
             // 
             // boxContainer
             // 
@@ -180,7 +172,6 @@ namespace FormControll
             this.boxHeight.Name = "boxHeight";
             this.boxHeight.Size = new System.Drawing.Size(100, 29);
             this.boxHeight.TabIndex = 6;
-            this.boxHeight.Text = "30";
             // 
             // boxHeightText
             // 
@@ -205,10 +196,6 @@ namespace FormControll
             // 
             // groupBoxA
             // 
-            this.groupBoxA.Controls.Add(this.label15);
-            this.groupBoxA.Controls.Add(this.boardARight);
-            this.groupBoxA.Controls.Add(this.label14);
-            this.groupBoxA.Controls.Add(this.boardABottom);
             this.groupBoxA.Controls.Add(this.label13);
             this.groupBoxA.Controls.Add(this.boardALeft);
             this.groupBoxA.Controls.Add(this.label12);
@@ -229,38 +216,6 @@ namespace FormControll
             this.groupBoxA.TabIndex = 4;
             this.groupBoxA.TabStop = false;
             this.groupBoxA.Text = "地台板A";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(692, 157);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(17, 12);
-            this.label15.TabIndex = 27;
-            this.label15.Text = "MM";
-            // 
-            // boardARight
-            // 
-            this.boardARight.Location = new System.Drawing.Point(640, 153);
-            this.boardARight.Name = "boardARight";
-            this.boardARight.Size = new System.Drawing.Size(46, 21);
-            this.boardARight.TabIndex = 26;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(489, 268);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(17, 12);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "MM";
-            // 
-            // boardABottom
-            // 
-            this.boardABottom.Location = new System.Drawing.Point(437, 264);
-            this.boardABottom.Name = "boardABottom";
-            this.boardABottom.Size = new System.Drawing.Size(46, 21);
-            this.boardABottom.TabIndex = 24;
             // 
             // label13
             // 
@@ -340,7 +295,6 @@ namespace FormControll
             this.boardAHeight.Name = "boardAHeight";
             this.boardAHeight.Size = new System.Drawing.Size(100, 29);
             this.boardAHeight.TabIndex = 15;
-            this.boardAHeight.Text = "30";
             // 
             // boardAHeightText
             // 
@@ -378,7 +332,6 @@ namespace FormControll
             this.boardAWidth.Name = "boardAWidth";
             this.boardAWidth.Size = new System.Drawing.Size(100, 29);
             this.boardAWidth.TabIndex = 12;
-            this.boardAWidth.Text = "30";
             this.boardAWidth.TextChanged += new System.EventHandler(this.boardAWidth_TextChanged);
             // 
             // boardAWidthText
@@ -397,10 +350,6 @@ namespace FormControll
             this.groupBoxB.Controls.Add(this.boardBRight);
             this.groupBoxB.Controls.Add(this.label17);
             this.groupBoxB.Controls.Add(this.boardBBottom);
-            this.groupBoxB.Controls.Add(this.label18);
-            this.groupBoxB.Controls.Add(this.boardBLeft);
-            this.groupBoxB.Controls.Add(this.label19);
-            this.groupBoxB.Controls.Add(this.boardBTop);
             this.groupBoxB.Controls.Add(this.label20);
             this.groupBoxB.Controls.Add(this.textBox11);
             this.groupBoxB.Controls.Add(this.label21);
@@ -450,38 +399,6 @@ namespace FormControll
             this.boardBBottom.Name = "boardBBottom";
             this.boardBBottom.Size = new System.Drawing.Size(46, 21);
             this.boardBBottom.TabIndex = 24;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(293, 154);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(17, 12);
-            this.label18.TabIndex = 23;
-            this.label18.Text = "MM";
-            // 
-            // boardBLeft
-            // 
-            this.boardBLeft.Location = new System.Drawing.Point(241, 150);
-            this.boardBLeft.Name = "boardBLeft";
-            this.boardBLeft.Size = new System.Drawing.Size(46, 21);
-            this.boardBLeft.TabIndex = 22;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(489, 42);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(17, 12);
-            this.label19.TabIndex = 21;
-            this.label19.Text = "MM";
-            // 
-            // boardBTop
-            // 
-            this.boardBTop.Location = new System.Drawing.Point(437, 38);
-            this.boardBTop.Name = "boardBTop";
-            this.boardBTop.Size = new System.Drawing.Size(46, 21);
-            this.boardBTop.TabIndex = 20;
             // 
             // label20
             // 
@@ -715,10 +632,6 @@ namespace FormControll
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox boardAWidth;
         private System.Windows.Forms.Label boardAWidthText;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox boardARight;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox boardABottom;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox boardALeft;
         private System.Windows.Forms.GroupBox groupBoxB;
@@ -726,10 +639,6 @@ namespace FormControll
         private System.Windows.Forms.TextBox boardBRight;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox boardBBottom;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox boardBLeft;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox boardBTop;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Label label21;

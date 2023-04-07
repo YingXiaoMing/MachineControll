@@ -20,7 +20,7 @@ namespace FormControll
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            string filePath = @"C:\Users\ljl\source\repos\FormControll\FormControll\box.pdf";
+            string filePath = $"{this.GetType().Assembly.Location}box.pdf";
             panelPDF.Controls.Clear();
             ChromiumWebBrowser browser = new ChromiumWebBrowser(filePath);
             browser.Dock = DockStyle.Fill;
