@@ -112,7 +112,9 @@ namespace FormControll
 
         private void DrawListView(ListView drawListView, List<ItemInfo> t, int board_length, int board_width, Panel panelView)
         {
-            panelView.Width = (int)(((decimal)panelView.Height / (decimal)board_width) * board_length);
+            var p_width = (int)(((decimal)panelView.Height / (decimal)board_width) * board_length);
+
+            panelView.Width = p_width;
 
             drawListView.Items.Clear();
             panelView.Controls.Clear();
@@ -120,21 +122,23 @@ namespace FormControll
             {
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = (drawListView.Items.Count + 1) + "";
+
                 lvi.SubItems.Add(item.CenterX.ToString());
                 lvi.SubItems.Add(item.CenterY.ToString());
                 drawListView.BeginUpdate();
                 drawListView.Items.Add(lvi);
                 drawListView.EndUpdate();
-                var draw_box_length = panelView.Width * ((decimal)item.Length / (decimal)board_length);
+                var draw_box_length = p_width * ((decimal)item.Length / (decimal)board_length);
                 var draw_box_width = panelView.Height * ((decimal)item.Width / (decimal)board_width);
-                var draw_box_pointX = (int)((item.PointX / item.Length) * draw_box_length);
-                var draw_box_pointY = (int)((item.PointY / item.Width) * draw_box_width);
+                var draw_box_pointX = (int)(((decimal)item.PointX / (decimal)board_length) * p_width);
+                var draw_box_pointY = (int)(((decimal)item.PointY / (decimal)board_width) * panelView.Height);
                 var b_pointX = 0;
                 var b_pointY = 0;
 
                 if (drawListView.Name.Equals("listViewA"))
                 {
                     b_pointX = draw_box_pointX;
+                    // 62.99 -> 62
                     b_pointY = panelView.Height - draw_box_pointY - (int)draw_box_width;
                 }
                 else
@@ -145,10 +149,10 @@ namespace FormControll
 
                 // 绘制
                 Label txtBox = new Label();
+
                 txtBox.BorderStyle = BorderStyle.FixedSingle;
                 txtBox.Text = (t.IndexOf(item) + 1) + "";
                 txtBox.TextAlign = ContentAlignment.MiddleCenter;
-
                 txtBox.SetBounds(b_pointX, b_pointY, (int)draw_box_length, (int)draw_box_width);
                 panelView.Controls.Add(txtBox);
             }

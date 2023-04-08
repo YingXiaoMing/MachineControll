@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FormControll
 {
-    public  class ItemInfo
+    public class ItemInfo
     {
         public int X { get; set; }
         public int Y { get; set; }
@@ -19,7 +19,7 @@ namespace FormControll
         public decimal PointX => X + XOffset;
         public decimal PointY => Y + YOffset;
 
-        public decimal CenterX => (PointX + Length) / 2;
-        public decimal CenterY => (PointY + Width) / 2;
+        public decimal CenterX => PointX + (decimal)Length / 2;
+        public decimal CenterY => PointY + (decimal)Width / 2;
     }
 }
