@@ -86,18 +86,18 @@ namespace FormControll
             this.label14 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.boxContainer.SuspendLayout();
             this.groupBoxA.SuspendLayout();
             this.groupBoxB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // boxWidthText
@@ -234,7 +234,7 @@ namespace FormControll
             this.groupBoxA.Size = new System.Drawing.Size(718, 312);
             this.groupBoxA.TabIndex = 4;
             this.groupBoxA.TabStop = false;
-            this.groupBoxA.Text = "地台板A";
+            this.groupBoxA.Text = "右版";
             this.groupBoxA.Enter += new System.EventHandler(this.groupBoxA_Enter);
             // 
             // label13
@@ -390,7 +390,7 @@ namespace FormControll
             this.groupBoxB.Size = new System.Drawing.Size(718, 312);
             this.groupBoxB.TabIndex = 28;
             this.groupBoxB.TabStop = false;
-            this.groupBoxB.Text = "地台板B";
+            this.groupBoxB.Text = "左版";
             // 
             // label16
             // 
@@ -498,6 +498,7 @@ namespace FormControll
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(320, 189);
             this.panel2.TabIndex = 0;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // boardBWidth
             // 
@@ -656,11 +657,21 @@ namespace FormControll
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.pictureBox1.BackgroundImage = global::FormControll.Properties.Resources.机械臂_copy;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(691, 346);
+            this.pictureBox1.Location = new System.Drawing.Point(698, 344);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(124, 60);
             this.pictureBox1.TabIndex = 33;
             this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::FormControll.Properties.Resources.arrowup_copy_copy;
+            this.pictureBox5.Location = new System.Drawing.Point(600, 40);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(34, 29);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 38;
+            this.pictureBox5.TabStop = false;
             // 
             // pictureBox2
             // 
@@ -692,16 +703,6 @@ namespace FormControll
             this.pictureBox3.TabIndex = 36;
             this.pictureBox3.TabStop = false;
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::FormControll.Properties.Resources.arrowup_copy_copy;
-            this.pictureBox5.Location = new System.Drawing.Point(600, 40);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(34, 29);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 38;
-            this.pictureBox5.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -725,10 +726,10 @@ namespace FormControll
             this.groupBoxB.ResumeLayout(false);
             this.groupBoxB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }

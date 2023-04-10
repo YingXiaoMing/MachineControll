@@ -141,7 +141,9 @@ namespace FormControll
                 else
                 {
                     b_pointX = (int)((decimal)panelView.Width - draw_box_pointX - draw_box_length);
-                    b_pointY = (int)draw_box_pointY;
+
+                    b_pointY = (int)((decimal)panelView.Height - draw_box_pointY - draw_box_width);
+                    //b_pointY = (int)draw_box_pointY;
                 }
 
                 // 绘制
@@ -307,6 +309,10 @@ namespace FormControll
         }
 
         private void groupBoxA_Enter(object sender, EventArgs e)
+        {
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
         }
     }
