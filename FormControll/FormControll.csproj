@@ -161,6 +161,11 @@
     <None Include="Resources\机械臂-copy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\arrow-bottom1.png" />
+    <None Include="Resources\arrow-bottom.png" />
+    <None Include="Resources\arrowup.png" />
+    <None Include="Resources\arrowup-copy-copy-copy.png" />
+    <None Include="Resources\arrowup-copy-copy.png" />
     <Content Include="Resources\box.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

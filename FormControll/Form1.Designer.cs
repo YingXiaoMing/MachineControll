@@ -79,11 +79,25 @@ namespace FormControll
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.printBtn = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.boxContainer.SuspendLayout();
             this.groupBoxA.SuspendLayout();
             this.groupBoxB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // boxWidthText
@@ -196,6 +210,11 @@ namespace FormControll
             // 
             // groupBoxA
             // 
+            this.groupBoxA.Controls.Add(this.pictureBox4);
+            this.groupBoxA.Controls.Add(this.pictureBox3);
+            this.groupBoxA.Controls.Add(this.label9);
+            this.groupBoxA.Controls.Add(this.label7);
+            this.groupBoxA.Controls.Add(this.label15);
             this.groupBoxA.Controls.Add(this.label13);
             this.groupBoxA.Controls.Add(this.boardALeft);
             this.groupBoxA.Controls.Add(this.label12);
@@ -347,6 +366,11 @@ namespace FormControll
             // 
             // groupBoxB
             // 
+            this.groupBoxB.Controls.Add(this.pictureBox5);
+            this.groupBoxB.Controls.Add(this.pictureBox2);
+            this.groupBoxB.Controls.Add(this.label18);
+            this.groupBoxB.Controls.Add(this.label14);
+            this.groupBoxB.Controls.Add(this.label3);
             this.groupBoxB.Controls.Add(this.label16);
             this.groupBoxB.Controls.Add(this.boardBRight);
             this.groupBoxB.Controls.Add(this.label17);
@@ -371,7 +395,7 @@ namespace FormControll
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(692, 157);
+            this.label16.Location = new System.Drawing.Point(293, 152);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(17, 12);
             this.label16.TabIndex = 27;
@@ -379,7 +403,7 @@ namespace FormControll
             // 
             // boardBRight
             // 
-            this.boardBRight.Location = new System.Drawing.Point(640, 153);
+            this.boardBRight.Location = new System.Drawing.Point(241, 148);
             this.boardBRight.Name = "boardBRight";
             this.boardBRight.Size = new System.Drawing.Size(46, 21);
             this.boardBRight.TabIndex = 26;
@@ -571,6 +595,62 @@ namespace FormControll
             this.printBtn.UseVisualStyleBackColor = true;
             this.printBtn.Click += new System.EventHandler(this.printBtn_Click);
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("宋体", 10F);
+            this.label15.Location = new System.Drawing.Point(266, 258);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 14);
+            this.label15.TabIndex = 32;
+            this.label15.Text = "(0,0)";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(239, 132);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "长度边距";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(435, 23);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "高度边距";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(239, 131);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "长度边距";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(435, 292);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.TabIndex = 31;
+            this.label14.Text = "高度边距";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("宋体", 10F);
+            this.label18.Location = new System.Drawing.Point(640, 55);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(42, 14);
+            this.label18.TabIndex = 34;
+            this.label18.Text = "(0,0)";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -581,6 +661,46 @@ namespace FormControll
             this.pictureBox1.Size = new System.Drawing.Size(124, 60);
             this.pictureBox1.TabIndex = 33;
             this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::FormControll.Properties.Resources.arrow_bottom1;
+            this.pictureBox2.Location = new System.Drawing.Point(647, 77);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(29, 34);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 35;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::FormControll.Properties.Resources.arrowup_copy_copy_copy;
+            this.pictureBox4.Location = new System.Drawing.Point(314, 264);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(34, 29);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 37;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::FormControll.Properties.Resources.arrowup;
+            this.pictureBox3.Location = new System.Drawing.Point(272, 218);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(29, 34);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 36;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::FormControll.Properties.Resources.arrowup_copy_copy;
+            this.pictureBox5.Location = new System.Drawing.Point(600, 40);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(34, 29);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 38;
+            this.pictureBox5.TabStop = false;
             // 
             // Form1
             // 
@@ -605,6 +725,10 @@ namespace FormControll
             this.groupBoxB.ResumeLayout(false);
             this.groupBoxB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -661,6 +785,16 @@ namespace FormControll
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button printBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
     }
 }
 
