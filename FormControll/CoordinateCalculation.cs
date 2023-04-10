@@ -8,7 +8,7 @@ namespace FormControll
 {
     public static class CoordinateCalculation
     {
-        static List<int> UnboundedKnapsack(int[] val, int[] wt, int W)
+        private static List<int> UnboundedKnapsack(int[] val, int[] wt, int W)
         {
             int n = val.Length;
             int[] dp = new int[W + 1];
@@ -37,10 +37,8 @@ namespace FormControll
             return path.Select(x => val[x]).ToList();
         }
 
-
-        static (List<int>, bool) GetList(int platformLength, int platformWidth, int itemLength, int itemWidth)
+        private static (List<int>, bool) GetList(int platformLength, int platformWidth, int itemLength, int itemWidth)
         {
-
             // 获取以长排列最优解
             var list = UnboundedKnapsack(new int[] { itemWidth, itemLength }, new int[] { itemWidth, itemLength }, platformLength);
 
@@ -69,8 +67,7 @@ namespace FormControll
             }
         }
 
-
-        static List<ItemInfo> GetItems(int platformLength, int platformWidth, int xOffset_platform, int yOffset_platform, int itemLength, int itemWidth, List<int> list, bool isHorizontal)
+        private static List<ItemInfo> GetItems(int platformLength, int platformWidth, int xOffset_platform, int yOffset_platform, int itemLength, int itemWidth, List<int> list, bool isHorizontal)
         {
             // 物品面积（用于求另一边长）
             var area = itemLength * itemWidth;
@@ -94,8 +91,8 @@ namespace FormControll
                             Y = i * (area / item),
                             Length = item,
                             Width = area / item,
-                            XOffset = xOffset - xOffset_platform,
-                            YOffset = yOffset - yOffset_platform
+                            XOffset = xOffset,
+                            YOffset = yOffset
                         });
                     }
                     step += item;
@@ -128,7 +125,6 @@ namespace FormControll
             //Console.WriteLine(itemInfos);
             return itemInfos;
         }
-
 
         /// <summary>
         /// 计算物品位置（左下为 （0，0））
