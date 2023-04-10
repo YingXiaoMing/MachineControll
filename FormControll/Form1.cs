@@ -41,9 +41,6 @@ namespace FormControll
             }
         }
 
-        private List<BoxCorrdinate> ViewAListData { get; set; } = new List<BoxCorrdinate>();
-        private List<BoxCorrdinate> ViewBListData { get; set; } = new List<BoxCorrdinate>();
-
         private List<ItemInfo> AList { get; set; } = new List<ItemInfo>();
         private List<ItemInfo> BList { get; set; } = new List<ItemInfo>();
 
@@ -128,23 +125,23 @@ namespace FormControll
                 drawListView.BeginUpdate();
                 drawListView.Items.Add(lvi);
                 drawListView.EndUpdate();
-                var draw_box_length = p_width * ((decimal)item.Length / (decimal)board_length);
-                var draw_box_width = panelView.Height * ((decimal)item.Width / (decimal)board_width);
-                var draw_box_pointX = (int)(((decimal)item.PointX / (decimal)board_length) * p_width);
-                var draw_box_pointY = (int)(((decimal)item.PointY / (decimal)board_width) * panelView.Height);
+                var draw_box_length = (decimal)p_width * ((decimal)item.Length / (decimal)board_length);
+                var draw_box_width = (decimal)panelView.Height * ((decimal)item.Width / (decimal)board_width);
+                var draw_box_pointX = ((decimal)item.PointX / (decimal)board_length) * (decimal)p_width;
+                var draw_box_pointY = ((decimal)item.PointY / (decimal)board_width) * (decimal)panelView.Height;
                 var b_pointX = 0;
                 var b_pointY = 0;
 
                 if (drawListView.Name.Equals("listViewA"))
                 {
-                    b_pointX = draw_box_pointX;
+                    b_pointX = (int)draw_box_pointX;
                     // 62.99 -> 62
-                    b_pointY = panelView.Height - draw_box_pointY - (int)draw_box_width;
+                    b_pointY = (int)((decimal)panelView.Height - draw_box_pointY - draw_box_width);
                 }
                 else
                 {
-                    b_pointX = panelView.Width - draw_box_pointX - (int)draw_box_length;
-                    b_pointY = draw_box_pointY;
+                    b_pointX = (int)((decimal)panelView.Width - draw_box_pointX - draw_box_length);
+                    b_pointY = (int)draw_box_pointY;
                 }
 
                 // 绘制
