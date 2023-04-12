@@ -85,8 +85,8 @@ namespace FormControll
             if (string.IsNullOrWhiteSpace(boardAWidth.Text) == false && string.IsNullOrWhiteSpace(boardAHeight.Text) == false)
             {
                 AList = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardAWidth.Text)), int.Parse(HandleEmptyText(boardAHeight.Text)), int.Parse(HandleEmptyText(boardALeft.Text)), int.Parse(HandleEmptyText(boardATop.Text)), int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
-
-                DrawListView(listViewA, AList, int.Parse(boardAWidth.Text), int.Parse(boardAHeight.Text), panel1);
+                var newList = AList.OrderBy(t => t.PointX).ToList();
+                DrawListView(listViewA, newList, int.Parse(boardAWidth.Text), int.Parse(boardAHeight.Text), panel1);
             }
             else
             {
@@ -98,7 +98,8 @@ namespace FormControll
                 string.IsNullOrWhiteSpace(boardBHeight.Text) == false)
             {
                 BList = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardBWidth.Text)), int.Parse(HandleEmptyText(boardBHeight.Text)), int.Parse(HandleEmptyText(boardBRight.Text)), int.Parse(HandleEmptyText(boardBBottom.Text)), int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
-                DrawListView(listViewB, BList, int.Parse(boardBWidth.Text), int.Parse(boardBHeight.Text), panel2);
+                var newList = BList.OrderByDescending(t => t.PointX).ToList();
+                DrawListView(listViewB, newList, int.Parse(boardBWidth.Text), int.Parse(boardBHeight.Text), panel2);
             }
             else
             {
@@ -109,42 +110,49 @@ namespace FormControll
 
         private void DrawListView(ListView drawListView, List<ItemInfo> t, int board_length, int board_width, Panel panelView)
         {
+            // 更改版面的宽度
             var p_width = (int)(((decimal)panelView.Height / (decimal)board_width) * board_length);
-
+            var save_board_width = panelView.Width;
+            var disparityWidth = save_board_width - p_width; //缩减的宽度差
             panelView.Width = p_width;
-
+            if (drawListView.Name.Equals("listViewA"))
+            {
+                pictureBox3.Location = new Point(pictureBox3.Location.X - disparityWidth, pictureBox3.Location.Y);
+                pictureBox5.Location = new Point(pictureBox5.Location.X - disparityWidth, pictureBox5.Location.Y);
+                label15.Location = new Point(label15.Location.X - disparityWidth, label15.Location.Y);
+            }
             drawListView.Items.Clear();
             panelView.Controls.Clear();
             foreach (var item in t)
             {
-                ListViewItem lvi = new ListViewItem();
-                lvi.Text = (drawListView.Items.Count + 1) + "";
+                var draw_box_length = (decimal)p_width / ((decimal)board_length / (decimal)item.Length);
+                var draw_box_width = (decimal)panelView.Height / ((decimal)board_width / (decimal)item.Width);
 
-                lvi.SubItems.Add(item.CenterX.ToString());
-                lvi.SubItems.Add(item.CenterY.ToString());
-                drawListView.BeginUpdate();
-                drawListView.Items.Add(lvi);
-                drawListView.EndUpdate();
-                var draw_box_length = (decimal)p_width * ((decimal)item.Length / (decimal)board_length);
-                var draw_box_width = (decimal)panelView.Height * ((decimal)item.Width / (decimal)board_width);
-                var draw_box_pointX = ((decimal)item.PointX / (decimal)board_length) * (decimal)p_width;
-                var draw_box_pointY = ((decimal)item.PointY / (decimal)board_width) * (decimal)panelView.Height;
-                var b_pointX = 0;
-                var b_pointY = 0;
+                //var draw_box_length = (decimal)p_width * ((decimal)item.Length / (decimal)board_length);
+                //var draw_box_width = (decimal)panelView.Height * ((decimal)item.Width / (decimal)board_width);
+                var draw_box_pointX = (int)(((decimal)item.PointX / (decimal)board_length) * (decimal)p_width);
+                var draw_box_pointY = (int)(((decimal)item.PointY / (decimal)board_width) * (decimal)panelView.Height);
 
                 if (drawListView.Name.Equals("listViewA"))
                 {
-                    b_pointX = (int)draw_box_pointX;
-                    // 62.99 -> 62
-                    b_pointY = (int)((decimal)panelView.Height - draw_box_pointY - draw_box_width);
+                    // 根据需求重新绘制对应的坐标点
+                    item.DrawCenterX = board_length - item.CenterX;
+                    item.DrawCenterY = board_width - item.CenterY;
                 }
                 else
                 {
-                    b_pointX = (int)((decimal)panelView.Width - draw_box_pointX - draw_box_length);
-
-                    b_pointY = (int)((decimal)panelView.Height - draw_box_pointY - draw_box_width);
-                    //b_pointY = (int)draw_box_pointY;
+                    item.DrawCenterX = item.CenterX;
+                    item.DrawCenterY = item.CenterY;
                 }
+
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = (drawListView.Items.Count + 1) + "";
+
+                lvi.SubItems.Add(item.DrawCenterX.ToString());
+                lvi.SubItems.Add(item.DrawCenterY.ToString());
+                drawListView.BeginUpdate();
+                drawListView.Items.Add(lvi);
+                drawListView.EndUpdate();
 
                 // 绘制
                 Label txtBox = new Label();
@@ -152,7 +160,7 @@ namespace FormControll
                 txtBox.BorderStyle = BorderStyle.FixedSingle;
                 txtBox.Text = (t.IndexOf(item) + 1) + "";
                 txtBox.TextAlign = ContentAlignment.MiddleCenter;
-                txtBox.SetBounds(b_pointX, b_pointY, (int)draw_box_length, (int)draw_box_width);
+                txtBox.SetBounds(draw_box_pointX, draw_box_pointY, (int)draw_box_length, (int)draw_box_width);
                 panelView.Controls.Add(txtBox);
             }
         }
@@ -229,10 +237,10 @@ namespace FormControll
                     gfx.DrawString((AList.IndexOf(item) + 1).ToString(), font, XBrushes.Black, new XRect(box_x + 10, cur_y, 60, 40), XStringFormats.TopLeft);
 
                     font = new XFont("华文宋体", 12, XFontStyle.Regular);
-                    gfx.DrawString(item.CenterX.ToString(), font, XBrushes.Black, new XRect(point_x_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
+                    gfx.DrawString(item.DrawCenterX.ToString(), font, XBrushes.Black, new XRect(point_x_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
 
                     font = new XFont("华文宋体", 12, XFontStyle.Regular);
-                    gfx.DrawString(item.CenterY.ToString(), font, XBrushes.Black, new XRect(point_y_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
+                    gfx.DrawString(item.DrawCenterY.ToString(), font, XBrushes.Black, new XRect(point_y_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
                 }
             }
             if (BList.Any() == true)
@@ -261,10 +269,10 @@ namespace FormControll
                     gfx.DrawString((BList.IndexOf(item) + 1).ToString(), font, XBrushes.Black, new XRect(box_x + 10, cur_y, 60, 40), XStringFormats.TopLeft);
 
                     font = new XFont("华文宋体", 12, XFontStyle.Regular);
-                    gfx.DrawString(item.CenterX.ToString(), font, XBrushes.Black, new XRect(point_x_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
+                    gfx.DrawString(item.DrawCenterX.ToString(), font, XBrushes.Black, new XRect(point_x_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
 
                     font = new XFont("华文宋体", 12, XFontStyle.Regular);
-                    gfx.DrawString(item.CenterY.ToString(), font, XBrushes.Black, new XRect(point_y_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
+                    gfx.DrawString(item.DrawCenterY.ToString(), font, XBrushes.Black, new XRect(point_y_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
                 }
             }
 
@@ -313,6 +321,14 @@ namespace FormControll
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
         {
         }
     }

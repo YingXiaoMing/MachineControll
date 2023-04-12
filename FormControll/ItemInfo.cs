@@ -15,7 +15,8 @@ namespace FormControll
         public int Height { get; set; }
         public decimal XOffset { get; set; }
         public decimal YOffset { get; set; }
-
+        public decimal DrawCenterX { get; set; }
+        public decimal DrawCenterY { get; set; }
         public decimal PointX => X + XOffset;
         public decimal PointY => Y + YOffset;
 

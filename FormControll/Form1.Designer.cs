@@ -86,18 +86,21 @@ namespace FormControll
             this.label14 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
             this.boxContainer.SuspendLayout();
             this.groupBoxA.SuspendLayout();
             this.groupBoxB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // boxWidthText
@@ -210,7 +213,8 @@ namespace FormControll
             // 
             // groupBoxA
             // 
-            this.groupBoxA.Controls.Add(this.pictureBox4);
+            this.groupBoxA.Controls.Add(this.pictureBox5);
+            this.groupBoxA.Controls.Add(this.listViewA);
             this.groupBoxA.Controls.Add(this.pictureBox3);
             this.groupBoxA.Controls.Add(this.label9);
             this.groupBoxA.Controls.Add(this.label7);
@@ -229,9 +233,9 @@ namespace FormControll
             this.groupBoxA.Controls.Add(this.panel1);
             this.groupBoxA.Controls.Add(this.boardAWidth);
             this.groupBoxA.Controls.Add(this.boardAWidthText);
-            this.groupBoxA.Location = new System.Drawing.Point(299, 28);
+            this.groupBoxA.Location = new System.Drawing.Point(269, 32);
             this.groupBoxA.Name = "groupBoxA";
-            this.groupBoxA.Size = new System.Drawing.Size(718, 312);
+            this.groupBoxA.Size = new System.Drawing.Size(491, 697);
             this.groupBoxA.TabIndex = 4;
             this.groupBoxA.TabStop = false;
             this.groupBoxA.Text = "右版";
@@ -240,7 +244,7 @@ namespace FormControll
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(293, 154);
+            this.label13.Location = new System.Drawing.Point(71, 492);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(17, 12);
             this.label13.TabIndex = 23;
@@ -248,7 +252,7 @@ namespace FormControll
             // 
             // boardALeft
             // 
-            this.boardALeft.Location = new System.Drawing.Point(241, 150);
+            this.boardALeft.Location = new System.Drawing.Point(19, 488);
             this.boardALeft.Name = "boardALeft";
             this.boardALeft.Size = new System.Drawing.Size(46, 21);
             this.boardALeft.TabIndex = 22;
@@ -256,7 +260,7 @@ namespace FormControll
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(489, 42);
+            this.label12.Location = new System.Drawing.Point(275, 380);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(17, 12);
             this.label12.TabIndex = 21;
@@ -265,7 +269,7 @@ namespace FormControll
             // 
             // boardATop
             // 
-            this.boardATop.Location = new System.Drawing.Point(437, 38);
+            this.boardATop.Location = new System.Drawing.Point(223, 376);
             this.boardATop.Name = "boardATop";
             this.boardATop.Size = new System.Drawing.Size(46, 21);
             this.boardATop.TabIndex = 20;
@@ -339,7 +343,7 @@ namespace FormControll
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(314, 69);
+            this.panel1.Location = new System.Drawing.Point(92, 407);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(320, 189);
             this.panel1.TabIndex = 0;
@@ -366,8 +370,9 @@ namespace FormControll
             // 
             // groupBoxB
             // 
-            this.groupBoxB.Controls.Add(this.pictureBox5);
             this.groupBoxB.Controls.Add(this.pictureBox2);
+            this.groupBoxB.Controls.Add(this.listViewB);
+            this.groupBoxB.Controls.Add(this.pictureBox4);
             this.groupBoxB.Controls.Add(this.label18);
             this.groupBoxB.Controls.Add(this.label14);
             this.groupBoxB.Controls.Add(this.label3);
@@ -385,9 +390,9 @@ namespace FormControll
             this.groupBoxB.Controls.Add(this.panel2);
             this.groupBoxB.Controls.Add(this.boardBWidth);
             this.groupBoxB.Controls.Add(this.boardBWidthText);
-            this.groupBoxB.Location = new System.Drawing.Point(299, 402);
+            this.groupBoxB.Location = new System.Drawing.Point(901, 32);
             this.groupBoxB.Name = "groupBoxB";
-            this.groupBoxB.Size = new System.Drawing.Size(718, 312);
+            this.groupBoxB.Size = new System.Drawing.Size(491, 697);
             this.groupBoxB.TabIndex = 28;
             this.groupBoxB.TabStop = false;
             this.groupBoxB.Text = "左版";
@@ -395,7 +400,7 @@ namespace FormControll
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(293, 152);
+            this.label16.Location = new System.Drawing.Point(71, 490);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(17, 12);
             this.label16.TabIndex = 27;
@@ -403,7 +408,7 @@ namespace FormControll
             // 
             // boardBRight
             // 
-            this.boardBRight.Location = new System.Drawing.Point(241, 148);
+            this.boardBRight.Location = new System.Drawing.Point(19, 486);
             this.boardBRight.Name = "boardBRight";
             this.boardBRight.Size = new System.Drawing.Size(46, 21);
             this.boardBRight.TabIndex = 26;
@@ -412,7 +417,7 @@ namespace FormControll
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(489, 268);
+            this.label17.Location = new System.Drawing.Point(267, 606);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(17, 12);
             this.label17.TabIndex = 25;
@@ -420,7 +425,7 @@ namespace FormControll
             // 
             // boardBBottom
             // 
-            this.boardBBottom.Location = new System.Drawing.Point(437, 264);
+            this.boardBBottom.Location = new System.Drawing.Point(215, 602);
             this.boardBBottom.Name = "boardBBottom";
             this.boardBBottom.Size = new System.Drawing.Size(46, 21);
             this.boardBBottom.TabIndex = 24;
@@ -494,7 +499,7 @@ namespace FormControll
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(314, 69);
+            this.panel2.Location = new System.Drawing.Point(92, 407);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(320, 189);
             this.panel2.TabIndex = 0;
@@ -520,7 +525,7 @@ namespace FormControll
             // 
             // drawBtn
             // 
-            this.drawBtn.Location = new System.Drawing.Point(1093, 739);
+            this.drawBtn.Location = new System.Drawing.Point(1238, 731);
             this.drawBtn.Name = "drawBtn";
             this.drawBtn.Size = new System.Drawing.Size(75, 23);
             this.drawBtn.TabIndex = 29;
@@ -537,7 +542,7 @@ namespace FormControll
             this.listViewA.FullRowSelect = true;
             this.listViewA.GridLines = true;
             this.listViewA.HideSelection = false;
-            this.listViewA.Location = new System.Drawing.Point(1023, 34);
+            this.listViewA.Location = new System.Drawing.Point(247, 22);
             this.listViewA.Name = "listViewA";
             this.listViewA.Size = new System.Drawing.Size(226, 306);
             this.listViewA.TabIndex = 31;
@@ -566,7 +571,7 @@ namespace FormControll
             this.listViewB.FullRowSelect = true;
             this.listViewB.GridLines = true;
             this.listViewB.HideSelection = false;
-            this.listViewB.Location = new System.Drawing.Point(1023, 408);
+            this.listViewB.Location = new System.Drawing.Point(246, 26);
             this.listViewB.Name = "listViewB";
             this.listViewB.Size = new System.Drawing.Size(226, 306);
             this.listViewB.TabIndex = 32;
@@ -588,7 +593,7 @@ namespace FormControll
             // 
             // printBtn
             // 
-            this.printBtn.Location = new System.Drawing.Point(1174, 739);
+            this.printBtn.Location = new System.Drawing.Point(1319, 731);
             this.printBtn.Name = "printBtn";
             this.printBtn.Size = new System.Drawing.Size(75, 23);
             this.printBtn.TabIndex = 30;
@@ -600,7 +605,7 @@ namespace FormControll
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("宋体", 10F);
-            this.label15.Location = new System.Drawing.Point(266, 258);
+            this.label15.Location = new System.Drawing.Point(411, 602);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(42, 14);
             this.label15.TabIndex = 32;
@@ -609,7 +614,7 @@ namespace FormControll
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(239, 132);
+            this.label7.Location = new System.Drawing.Point(17, 470);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 33;
@@ -618,7 +623,7 @@ namespace FormControll
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(435, 23);
+            this.label9.Location = new System.Drawing.Point(221, 361);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 31;
@@ -627,7 +632,7 @@ namespace FormControll
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(239, 131);
+            this.label3.Location = new System.Drawing.Point(17, 469);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 34;
@@ -636,7 +641,7 @@ namespace FormControll
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(435, 292);
+            this.label14.Location = new System.Drawing.Point(213, 630);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(53, 12);
             this.label14.TabIndex = 31;
@@ -646,7 +651,7 @@ namespace FormControll
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("宋体", 10F);
-            this.label18.Location = new System.Drawing.Point(640, 55);
+            this.label18.Location = new System.Drawing.Point(44, 381);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(42, 14);
             this.label18.TabIndex = 34;
@@ -654,29 +659,18 @@ namespace FormControll
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox1.BackgroundImage = global::FormControll.Properties.Resources.机械臂_copy;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(698, 344);
+            this.pictureBox1.Image = global::FormControll.Properties.Resources.机械臂1;
+            this.pictureBox1.Location = new System.Drawing.Point(763, 443);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(124, 60);
-            this.pictureBox1.TabIndex = 33;
+            this.pictureBox1.Size = new System.Drawing.Size(134, 154);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 32;
             this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::FormControll.Properties.Resources.arrowup_copy_copy;
-            this.pictureBox5.Location = new System.Drawing.Point(600, 40);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(34, 29);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 38;
-            this.pictureBox5.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::FormControll.Properties.Resources.arrow_bottom1;
-            this.pictureBox2.Location = new System.Drawing.Point(647, 77);
+            this.pictureBox2.Location = new System.Drawing.Point(57, 411);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(29, 34);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -686,31 +680,61 @@ namespace FormControll
             // pictureBox4
             // 
             this.pictureBox4.Image = global::FormControll.Properties.Resources.arrowup_copy_copy_copy;
-            this.pictureBox4.Location = new System.Drawing.Point(314, 264);
+            this.pictureBox4.Location = new System.Drawing.Point(92, 372);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(34, 29);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 37;
             this.pictureBox4.TabStop = false;
             // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::FormControll.Properties.Resources.arrowup_copy_copy;
+            this.pictureBox5.Location = new System.Drawing.Point(373, 597);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(34, 29);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 38;
+            this.pictureBox5.TabStop = false;
+            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::FormControll.Properties.Resources.arrowup;
-            this.pictureBox3.Location = new System.Drawing.Point(272, 218);
+            this.pictureBox3.Location = new System.Drawing.Point(414, 559);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(29, 34);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 36;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label19);
+            this.panel3.Location = new System.Drawing.Point(763, 603);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(134, 122);
+            this.panel3.TabIndex = 33;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label19.Location = new System.Drawing.Point(24, 49);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(85, 24);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "取料台";
+            this.label19.Click += new System.EventHandler(this.label19_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1251, 774);
+            this.ClientSize = new System.Drawing.Size(1412, 774);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.listViewB);
-            this.Controls.Add(this.listViewA);
             this.Controls.Add(this.printBtn);
             this.Controls.Add(this.drawBtn);
             this.Controls.Add(this.groupBoxB);
@@ -726,10 +750,12 @@ namespace FormControll
             this.groupBoxB.ResumeLayout(false);
             this.groupBoxB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -785,7 +811,6 @@ namespace FormControll
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button printBtn;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label15;
@@ -796,6 +821,9 @@ namespace FormControll
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label19;
     }
 }
 

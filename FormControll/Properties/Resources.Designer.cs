@@ -113,6 +113,16 @@ namespace FormControll.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap rebort {
+            get {
+                object obj = ResourceManager.GetObject("rebort", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap rootbot {
             get {
                 object obj = ResourceManager.GetObject("rootbot", resourceCulture);
@@ -136,6 +146,16 @@ namespace FormControll.Properties {
         internal static System.Drawing.Bitmap 机械臂_copy {
             get {
                 object obj = ResourceManager.GetObject("机械臂-copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 机械臂1 {
+            get {
+                object obj = ResourceManager.GetObject("机械臂1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
