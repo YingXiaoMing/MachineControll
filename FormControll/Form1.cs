@@ -127,11 +127,8 @@ namespace FormControll
             {
                 var draw_box_length = (decimal)p_width / ((decimal)board_length / (decimal)item.Length);
                 var draw_box_width = (decimal)panelView.Height / ((decimal)board_width / (decimal)item.Width);
-
-                //var draw_box_length = (decimal)p_width * ((decimal)item.Length / (decimal)board_length);
-                //var draw_box_width = (decimal)panelView.Height * ((decimal)item.Width / (decimal)board_width);
-                var draw_box_pointX = (int)(((decimal)item.PointX / (decimal)board_length) * (decimal)p_width);
-                var draw_box_pointY = (int)(((decimal)item.PointY / (decimal)board_width) * (decimal)panelView.Height);
+                var draw_box_pointX = (int)Math.Round(((decimal)item.PointX / (decimal)board_length) * (decimal)p_width);
+                var draw_box_pointY = (int)Math.Round(((decimal)item.PointY / (decimal)board_width) * (decimal)panelView.Height);
 
                 if (drawListView.Name.Equals("listViewA"))
                 {
@@ -156,7 +153,6 @@ namespace FormControll
 
                 // 绘制
                 Label txtBox = new Label();
-
                 txtBox.BorderStyle = BorderStyle.FixedSingle;
                 txtBox.Text = (t.IndexOf(item) + 1) + "";
                 txtBox.TextAlign = ContentAlignment.MiddleCenter;
