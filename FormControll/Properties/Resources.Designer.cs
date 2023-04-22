@@ -63,6 +63,16 @@ namespace FormControll.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap _1B585980_E263_45a9_BE22_C4549BC248BE {
+            get {
+                object obj = ResourceManager.GetObject("1B585980-E263-45a9-BE22-C4549BC248BE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap arrow_bottom {
             get {
                 object obj = ResourceManager.GetObject("arrow-bottom", resourceCulture);
@@ -126,6 +136,36 @@ namespace FormControll.Properties {
         internal static System.Drawing.Bitmap rootbot {
             get {
                 object obj = ResourceManager.GetObject("rootbot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap viewBoard1 {
+            get {
+                object obj = ResourceManager.GetObject("viewBoard1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap viewBox {
+            get {
+                object obj = ResourceManager.GetObject("viewBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap viewBox1 {
+            get {
+                object obj = ResourceManager.GetObject("viewBox1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

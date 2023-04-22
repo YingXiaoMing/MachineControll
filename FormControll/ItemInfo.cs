@@ -17,6 +17,10 @@ namespace FormControll
         public decimal YOffset { get; set; }
         public decimal DrawCenterX { get; set; }
         public decimal DrawCenterY { get; set; }
+
+        public decimal DrawX { get; set; }
+        public decimal DrawY { get; set; }
+
         public decimal PointX => X + XOffset;
         public decimal PointY => Y + YOffset;
 

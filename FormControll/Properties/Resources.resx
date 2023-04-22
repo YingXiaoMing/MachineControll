@@ -118,17 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rebort" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rebort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="rootbot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rootbot.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="机械臂" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\机械臂.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="arrow-bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-bottom1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="arrow-bottom1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrowup" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrowup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,16 +127,37 @@
   <data name="机械臂-copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\机械臂-copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="rebort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rebort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="arrowup-copy-copy-copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrowup-copy-copy-copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="机械臂1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\机械臂1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="机械臂" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\机械臂.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="viewBox1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\viewBox1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow-bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-bottom1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="viewBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\viewBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1B585980-E263-45a9-BE22-C4549BC248BE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1B585980-E263-45a9-BE22-C4549BC248BE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrowup-copy-copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrowup-copy-copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arrow-bottom1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="rootbot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rootbot.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="机械臂1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\机械臂1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="viewBoard1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\viewBoard1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
