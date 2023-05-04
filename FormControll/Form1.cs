@@ -170,7 +170,6 @@ namespace FormControll
             DrawListView(listView4, LeftDoubleList, int.Parse(boardWidth.Text), int.Parse(boardHeight.Text), panel4);
         }
 
-
         private string ReturnShowOffsetDistance(string txt)
         {
             if (string.IsNullOrWhiteSpace(txt) || int.Parse(txt) == 0)
@@ -178,7 +177,6 @@ namespace FormControll
                 return "";
             }
             return int.Parse(txt) > 0 ? $"+ {txt} mm" : $"{txt} mm";
-           
         }
 
         private void DrawBtn_Click(object sender, EventArgs e)
@@ -207,7 +205,7 @@ namespace FormControll
             var save_board_width = panelView.Width;
             var disparityWidth = save_board_width - p_width; //缩减的宽度差
             panelView.Width = p_width;
-            
+
             if (drawListView.Name.Equals("listView1"))
             {
                 pictureBox3.Location = new Point(pictureBox3.Location.X - disparityWidth, pictureBox3.Location.Y);
@@ -435,8 +433,7 @@ namespace FormControll
             // 坐标轴Y
             this.gfx.DrawString("坐标轴Y", regularfont, XBrushes.Black, new XRect(y_x_point, line_y_point, 40, 20), XStringFormats.TopCenter);
             XPen pen = new XPen(XColor.FromKnownColor(XKnownColor.Black), 1);
-            this.gfx.DrawLine(pen, box_x_point,line_y_point + 20, box_x_point+240, line_y_point + 20);
-
+            this.gfx.DrawLine(pen, box_x_point, line_y_point + 20, box_x_point + 240, line_y_point + 20);
 
             foreach (var item in viewList)
             {
@@ -446,11 +443,9 @@ namespace FormControll
                 this.gfx.DrawString(item.DrawCenterY.ToString(), regularfont, XBrushes.Black, new XRect(y_x_point, line_y_point, 40, 20), XStringFormats.Center);
                 XPen line_pen = new XPen(XColor.FromKnownColor(XKnownColor.Black), 1);
                 this.gfx.DrawLine(line_pen, box_x_point, line_y_point + 20, box_x_point + 240, line_y_point + 20);
-
-
             }
 
-            var p_y = line_y_point > (int)(cur_y + 20 + img.PointHeight)? line_y_point : (int)(cur_y + img.PixelHeight + 20);
+            var p_y = line_y_point > (int)(cur_y + 20 + img.PointHeight) ? line_y_point : (int)(cur_y + img.PixelHeight + 20);
             return p_y;
         }
 
@@ -529,22 +524,18 @@ namespace FormControll
 
         private void listView3_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void label31_Click(object sender, EventArgs e)
         {
-
         }
 
         private void boardHeight_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void VerifyBoardTop()
@@ -569,9 +560,8 @@ namespace FormControll
 
         private void VerifyBoardLeft()
         {
-
             if (JudgeInputEmpty()) return;
-          
+
             var box_width = int.Parse(boxHeight.Text);
             var box_length = int.Parse(boxWdith.Text);
             var length_offset = int.Parse(HandleEmptyText(boardALeft.Text));
@@ -595,14 +585,28 @@ namespace FormControll
             VerifyBoardLeft();
         }
 
-        private void boardATop_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            VerifyBoardTop();
-        }
-
         private void boardALeft_TextChanged(object sender, EventArgs e)
         {
+        }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void boardALeft_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                VerifyBoardLeft();
+            }
+        }
+
+        private void boardATop_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                VerifyBoardTop();
+            }
         }
     }
 }

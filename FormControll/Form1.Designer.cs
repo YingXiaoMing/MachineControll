@@ -391,7 +391,7 @@ namespace FormControll
             this.boardALeft.Size = new System.Drawing.Size(46, 21);
             this.boardALeft.TabIndex = 7;
             this.boardALeft.TextChanged += new System.EventHandler(this.boardALeft_TextChanged);
-            this.boardALeft.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.boardALeft_KeyPress);
+            this.boardALeft.KeyDown += new System.Windows.Forms.KeyEventHandler(this.boardALeft_KeyDown);
             // 
             // boardATop
             // 
@@ -399,7 +399,7 @@ namespace FormControll
             this.boardATop.Name = "boardATop";
             this.boardATop.Size = new System.Drawing.Size(46, 21);
             this.boardATop.TabIndex = 8;
-            this.boardATop.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.boardATop_KeyPress);
+            this.boardATop.KeyDown += new System.Windows.Forms.KeyEventHandler(this.boardATop_KeyDown);
             // 
             // drawBtn
             // 
@@ -581,6 +581,7 @@ namespace FormControll
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 32;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox8
             // 
