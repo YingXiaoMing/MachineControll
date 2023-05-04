@@ -4,6 +4,7 @@ using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -63,8 +64,16 @@ namespace FormControll
 
         private List<ItemInfo> RightSingleList { get; set; } = new List<ItemInfo>();
         private List<ItemInfo> RightDoubleList { get; set; } = new List<ItemInfo>();
-        private List<ItemInfo> BList { get; set; } = new List<ItemInfo>();
+        private List<ItemInfo> LeftSingleList { get; set; } = new List<ItemInfo>();
+        private List<ItemInfo> LeftDoubleList { get; set; } = new List<ItemInfo>();
 
+        private MemoryStream ms1 { get; set; } = new MemoryStream();
+        private MemoryStream ms2 { get; set; } = new MemoryStream();
+        private MemoryStream ms3 { get; set; } = new MemoryStream();
+        private MemoryStream ms4 { get; set; } = new MemoryStream();
+
+        private int XOffset = 0;
+        private int YOffset = 0;
         private XGraphics gfx;
 
         private void label1_Click(object sender, EventArgs e)
@@ -95,6 +104,13 @@ namespace FormControll
         {
         }
 
+        private void ScreenShotPanelView(Panel panelView, MemoryStream ms)
+        {
+            Bitmap bmp = new Bitmap(panelView.Width, panelView.Height);
+            panelView.DrawToBitmap(bmp, panelView.ClientRectangle);
+            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+        }
+
         private string HandleEmptyText(string txt)
         {
             return string.IsNullOrEmpty(txt) ? "0" : txt;
@@ -102,12 +118,12 @@ namespace FormControll
 
         private void drawRightSingleBoard()
         {
-            var result = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardWidth.Text)), int.Parse(HandleEmptyText(boardHeight.Text)), int.Parse(HandleEmptyText(boardALeft.Text)), int.Parse(HandleEmptyText(boardATop.Text)), int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
-            var nlist = result.OrderBy(t => t.PointX).ToList();
+            var result = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardWidth.Text)), int.Parse(HandleEmptyText(boardHeight.Text)), XOffset, YOffset, int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
+            var nlist = result;
             nlist.ForEach(item =>
             {
-                item.DrawX = item.PointX;
-                item.DrawY = item.PointY;
+                item.DrawX = item.PointY;
+                item.DrawY = item.PointX;
             });
             RightSingleList = nlist;
             DrawListView(listView1, RightSingleList, int.Parse(boardWidth.Text), int.Parse(boardHeight.Text), panel1);
@@ -115,71 +131,83 @@ namespace FormControll
 
         private void drawRightDoubleBoard()
         {
-            var result = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardWidth.Text)), int.Parse(HandleEmptyText(boardHeight.Text)), int.Parse(HandleEmptyText(boardALeft.Text)), int.Parse(HandleEmptyText(boardATop.Text)), int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
-            var nlist = result.OrderBy(t => t.PointX).ToList();
+            var result = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardWidth.Text)), int.Parse(HandleEmptyText(boardHeight.Text)), XOffset, YOffset, int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
+            var nlist = result;
             nlist.ForEach(item =>
             {
-                item.DrawX = int.Parse(HandleEmptyText(boardWidth.Text)) - item.PointX - item.Length;
-                item.DrawY = int.Parse(HandleEmptyText(boardHeight.Text)) - item.PointY - item.Width;
+                item.DrawX = int.Parse(HandleEmptyText(boardHeight.Text)) - item.PointY - item.Width;
+                item.DrawY = int.Parse(HandleEmptyText(boardWidth.Text)) - item.PointX - item.Length;
             });
-            RightDoubleList = nlist.OrderBy(t => t.DrawY).OrderBy(t => t.DrawX).ToList();
+            nlist.Reverse();
+            RightDoubleList = nlist;
             DrawListView(listView2, RightDoubleList, int.Parse(boardWidth.Text), int.Parse(boardHeight.Text), panel2);
         }
 
         private void drawLeftSingleBoard()
         {
-            var result = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardWidth.Text)), int.Parse(HandleEmptyText(boardHeight.Text)), int.Parse(HandleEmptyText(boardALeft.Text)), int.Parse(HandleEmptyText(boardATop.Text)), int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
-            var nlist = result.OrderByDescending(t => t.PointX).ToList();
+            var result = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardWidth.Text)), int.Parse(HandleEmptyText(boardHeight.Text)), XOffset, YOffset, int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
+            var nlist = result;
             nlist.ForEach(item =>
             {
-                item.DrawX = item.PointX;
-                item.DrawY = item.PointY;
+                item.DrawX = item.PointY;
+                item.DrawY = item.PointX;
             });
-            RightSingleList = nlist;
-            DrawListView(listView3, RightSingleList, int.Parse(boardWidth.Text), int.Parse(boardHeight.Text), panel3);
+            LeftSingleList = nlist.OrderByDescending(t => t.DrawX).ToList();
+            DrawListView(listView3, LeftSingleList, int.Parse(boardWidth.Text), int.Parse(boardHeight.Text), panel3);
         }
 
         private void drawLeftDoubleBoard()
         {
-            var result = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardWidth.Text)), int.Parse(HandleEmptyText(boardHeight.Text)), int.Parse(HandleEmptyText(boardALeft.Text)), int.Parse(HandleEmptyText(boardATop.Text)), int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
-            var nlist = result.OrderByDescending(t => t.PointX).ToList();
+            var result = CoordinateCalculation.GetItemInfos(int.Parse(HandleEmptyText(boardWidth.Text)), int.Parse(HandleEmptyText(boardHeight.Text)), XOffset, YOffset, int.Parse(HandleEmptyText(boxWdith.Text)), int.Parse(HandleEmptyText(boxHeight.Text)));
+            var nlist = result;
             nlist.ForEach(item =>
             {
-                item.DrawX = int.Parse(HandleEmptyText(boardWidth.Text)) - item.PointX - item.Length;
-                item.DrawY = int.Parse(HandleEmptyText(boardHeight.Text)) - item.PointY - item.Width;
+                item.DrawX = int.Parse(HandleEmptyText(boardHeight.Text)) - item.PointY - item.Width;
+                item.DrawY = int.Parse(HandleEmptyText(boardWidth.Text)) - item.PointX - item.Length;
             });
-            RightDoubleList = nlist;
-            DrawListView(listView4, RightDoubleList, int.Parse(boardWidth.Text), int.Parse(boardHeight.Text), panel4);
+            nlist.Reverse();
+            LeftDoubleList = nlist.OrderByDescending(t => t.DrawX).ToList();
+            DrawListView(listView4, LeftDoubleList, int.Parse(boardWidth.Text), int.Parse(boardHeight.Text), panel4);
+        }
+
+
+        private string ReturnShowOffsetDistance(string txt)
+        {
+            if (string.IsNullOrWhiteSpace(txt) || int.Parse(txt) == 0)
+            {
+                return "";
+            }
+            return int.Parse(txt) > 0 ? $"+ {txt} mm" : $"{txt} mm";
+           
         }
 
         private void DrawBtn_Click(object sender, EventArgs e)
         {
             // 判断输入条件是否为空
-            if (JudgeBoxInputEmpty()) return;
+            if (JudgeInputEmpty()) return;
+            LengthOffset.Text = ReturnShowOffsetDistance(boardALeft.Text);
+            WidthOffset.Text = ReturnShowOffsetDistance(boardATop.Text);
+            // 判断地台板和箱子长度不能小于宽度
+            //if (JudgeBoxLengthLessThanWidth()) return;
+            //if (JudgeBoardLengthLessThanWidth()) return;
+            // textbox 输入的数字 条件限制，<= min(箱子长的1/5 ，箱子宽的1/5）
+            if (JudgeXYOffsetOverMinValue()) return;
 
-            if (string.IsNullOrWhiteSpace(boardWidth.Text) == false && string.IsNullOrWhiteSpace(boardHeight.Text) == false)
-            {
-                drawRightSingleBoard();
-                drawRightDoubleBoard();
-                drawLeftSingleBoard();
-                drawLeftDoubleBoard();
-            }
-            else
-            {
-                listView1.Items.Clear();
-                listView2.Items.Clear();
-                panel2.Controls.Clear();
-                panel1.Controls.Clear();
-            }
+            drawRightSingleBoard();
+            drawRightDoubleBoard();
+            drawLeftSingleBoard();
+            drawLeftDoubleBoard();
         }
 
         private void DrawListView(ListView drawListView, List<ItemInfo> t, int board_length, int board_width, Panel panelView, bool isDouble = false)
         {
             // 更改版面的宽度
-            var p_width = (int)(((decimal)panelView.Height / (decimal)board_width) * board_length);
+            // 高度是固定，变化的是页面的宽度=地台板的宽度
+            var p_width = (int)(((decimal)panelView.Height / (decimal)board_length) * board_width);
             var save_board_width = panelView.Width;
             var disparityWidth = save_board_width - p_width; //缩减的宽度差
             panelView.Width = p_width;
+            
             if (drawListView.Name.Equals("listView1"))
             {
                 pictureBox3.Location = new Point(pictureBox3.Location.X - disparityWidth, pictureBox3.Location.Y);
@@ -200,13 +228,14 @@ namespace FormControll
             panelView.Controls.Clear();
             foreach (var item in t)
             {
-                var draw_box_length = (decimal)p_width / ((decimal)board_length / (decimal)item.Length);
-                var draw_box_width = (decimal)panelView.Height / ((decimal)board_width / (decimal)item.Width);
-                var draw_box_pointX = (int)Math.Round(((decimal)item.DrawX / (decimal)board_length) * (decimal)p_width);
-                var draw_box_pointY = (int)Math.Round(((decimal)item.DrawY / (decimal)board_width) * (decimal)panelView.Height);
+                var draw_box_length = (decimal)p_width / ((decimal)board_width / (decimal)item.Width);
+                var draw_box_width = (decimal)panelView.Height / ((decimal)board_length / (decimal)item.Length);
+                var draw_box_pointX = (int)Math.Round(((decimal)item.DrawX / (decimal)board_width) * (decimal)p_width);
+                var draw_box_pointY = (int)Math.Round(((decimal)item.DrawY / (decimal)board_length) * (decimal)panelView.Height);
+
+                // 根据需求重新绘制对应的坐标点
                 if (drawListView.Name.Equals("listView1") || drawListView.Name.Equals("listView4"))
                 {
-                    // 根据需求重新绘制对应的坐标点
                     item.DrawCenterX = board_length - item.CenterX;
                     item.DrawCenterY = board_width - item.CenterY;
                 }
@@ -218,9 +247,9 @@ namespace FormControll
 
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = (drawListView.Items.Count + 1) + "";
-
                 lvi.SubItems.Add(item.DrawCenterX.ToString());
                 lvi.SubItems.Add(item.DrawCenterY.ToString());
+
                 drawListView.BeginUpdate();
                 drawListView.Items.Add(lvi);
                 drawListView.EndUpdate();
@@ -237,17 +266,78 @@ namespace FormControll
 
         private void printBtn_Click(object sender, EventArgs e)
         {
+            ms1 = new MemoryStream();
+            ms2 = new MemoryStream();
+            ms3 = new MemoryStream();
+            ms4 = new MemoryStream();
+
+            // 右版单层
+            ScreenShotPanelView(panel1, ms1);
+            // 右版双层
+            ScreenShotPanelView(panel2, ms2);
+            // 左版单层
+            ScreenShotPanelView(panel3, ms3);
+            // 左版双层
+            ScreenShotPanelView(panel4, ms4);
             string filePath = $"{this.GetType().Assembly.Location}box.pdf";
             pdfPrint(filePath);
-
             Form2 form2 = new Form2();
             form2.ShowDialog();
         }
 
-        private bool JudgeBoxInputEmpty()
+        private bool JudgeInputEmpty()
         {
-            if (isEmpty(boxWdith.Text, $"箱子长度") || isEmpty(boxHeight.Text, $"箱子宽度"))
+            if (isEmpty(boxWdith.Text, $"箱子长度") || isEmpty(boxHeight.Text, $"箱子宽度") || isEmpty(boardWidth.Text, "地台板长度") || isEmpty(boardHeight.Text, "地台板宽度"))
             {
+                return true;
+            }
+            return false;
+        }
+
+        private bool JudgeXYOffsetOverMinValue()
+        {
+            var box_width = int.Parse(boxHeight.Text);
+            var box_length = int.Parse(boxWdith.Text);
+            var length_offset = int.Parse(HandleEmptyText(boardALeft.Text));
+            var width_offset = int.Parse(HandleEmptyText(boardATop.Text));
+
+            var minNum = box_width / 5 < box_length / 5 ? box_width / 5 : box_length / 5;
+
+            //长边距离和短边距离 min(箱子长的1/5 ，箱子宽的1/5）
+            if (length_offset > minNum)
+            {
+                ShowTips($"箱子允许超出地台板长边的距离不超过{minNum}");
+                return true;
+            }
+            if (width_offset > minNum)
+            {
+                ShowTips($"箱子允许超出地台板长边的距离不超过{minNum}");
+                return true;
+            }
+            XOffset = length_offset;
+            YOffset = width_offset;
+            return false;
+        }
+
+        private bool JudgeBoxLengthLessThanWidth()
+        {
+            var box_width = int.Parse(boxHeight.Text);
+            var box_length = int.Parse(boxWdith.Text);
+            if (box_length < box_width)
+            {
+                ShowTips("箱子的长度不能小于宽度");
+                return true;
+            }
+            return false;
+        }
+
+        private bool JudgeBoardLengthLessThanWidth()
+        {
+            var board_width = int.Parse(boardHeight.Text);
+            var board_length = int.Parse(boardWidth.Text);
+            if (board_length < board_width)
+            {
+                ShowTips("地台板的长度不能小于宽度");
                 return true;
             }
             return false;
@@ -264,185 +354,104 @@ namespace FormControll
             return false;
         }
 
-        public void drawLine(DPoint fromXyPosition, DPoint toXyPosition)
-        {
-            this.gfx.DrawLine(this.pen, leftMargin + (fromXyPosition.x * cm), topMargin + (fromXyPosition.y * cm), leftMargin + (toXyPosition.x * cm), topMargin + (toXyPosition.y * cm));
-        }
-
-        private void drawTable(double initialPosX, double initialPosY, double width, double height, XBrush xbrush, List<String[]> contents = null)
-        {
-            drawSquare(new DPoint(initialPosX, initialPosY), width, height, xbrush);
-
-            if (contents == null)
-            {
-                contents = new List<String[]>();
-
-                contents.Add(new string[] { "Type", "Size", "Weight", "Stock", "Tax", "Price" });
-                contents.Add(new string[] { "Obo", "1", "45", "56", "16.00", "6.50" });
-                contents.Add(new string[] { "Crotolamo", "2", "72", "63", "16.00", "19.00" });
-            }
-
-            int columns = contents[0].Length;
-            int rows = contents.Count;
-
-            double distanceBetweenRows = height / rows;
-            double distanceBetweenColumns = width / columns;
-
-            /*******************************************************************/
-            // Draw the row lines
-            /*******************************************************************/
-
-            DPoint pointA = new DPoint(initialPosX, initialPosY);
-            DPoint pointB = new DPoint(initialPosX + width, initialPosY);
-
-            for (int i = 0; i <= rows; i++)
-            {
-                drawLine(pointA, pointB);
-
-                pointA.y = pointA.y + distanceBetweenRows;
-                pointB.y = pointB.y + distanceBetweenRows;
-            }
-            pointA = new DPoint(initialPosX, initialPosY);
-            pointB = new DPoint(initialPosX, initialPosY + height);
-
-            for (int i = 0; i <= columns; i++)
-            {
-                drawLine(pointA, pointB);
-
-                pointA.x = pointA.x + distanceBetweenColumns;
-                pointB.x = pointB.x + distanceBetweenColumns;
-            }
-
-            pointA = new DPoint(initialPosX, initialPosY);
-
-            foreach (String[] rowDataArray in contents)
-            {
-                foreach (String cellText in rowDataArray)
-                {
-                    this.gfx.DrawString(cellText, this.font, XBrushes.Black, new XRect(leftMargin + (pointA.x * cm), topMargin + (pointA.y * cm), distanceBetweenColumns * cm, distanceBetweenRows * cm), XStringFormats.Center);
-
-                    pointA.x = pointA.x + distanceBetweenColumns;
-                }
-
-                pointA.x = initialPosX;
-                pointA.y = pointA.y + distanceBetweenRows;
-            }
-        }
-
-        private void drawSquare(DPoint xyStartingPosition, double width, double height, XBrush xbrush)
-        {
-            Console.WriteLine("Drawing square starting at: " + xyStartingPosition.x + "," + xyStartingPosition.y + " width: " + width + " height: " + height);
-            this.gfx.DrawRectangle(xbrush, new XRect(leftMargin + (xyStartingPosition.x * cm), topMargin + (xyStartingPosition.y * cm), (width * cm), (height * cm)));
-        }
-
         private void pdfPrint(string filePath)
         {
             int margin_left_right = 30;//左右边距
             int margin_top_bottom = 30;//上下边距
+
             PdfDocument document = new PdfDocument();
             PdfPage page = document.AddPage();
             this.font = new XFont("Arial", 12, XFontStyle.Bold);
             this.pen = new XPen(XColors.Black, 0.5);
 
             page.Size = PageSize.A4;
-            XGraphics gfx = XGraphics.FromPdfPage(page);
-            this.gfx = gfx;
-            XFont boldfont = new XFont("华文宋体", 14, XFontStyle.Bold);
-            XFont regularfont = new XFont("华文宋体", 14, XFontStyle.Regular);
+            this.gfx = XGraphics.FromPdfPage(page);
+            XFont boldfont = new XFont("黑体", 12, XFontStyle.Regular);
+            XFont regularfont = new XFont("华文宋体", 12, XFontStyle.Regular);
             int cur_x_1 = 0 + margin_left_right;
             int cur_y_1 = 0 + margin_top_bottom;
-            gfx.DrawString("地台板参数:", boldfont, XBrushes.Black, new XRect(cur_x_1, cur_y_1, 80, 20), XStringFormats.TopLeft);
+            this.gfx.DrawString("  地台板参数:", boldfont, XBrushes.Black, new XRect(cur_x_1, cur_y_1, 80, 20), XStringFormats.TopLeft);
             cur_x_1 += 86;
-            gfx.DrawString("①长X宽X高: 1300*1100*50 (mm)", regularfont, XBrushes.Black, new XRect(cur_x_1, cur_y_1, 120, 20), XStringFormats.TopLeft);
+            this.gfx.DrawString($"①长X宽X高: {boardWidth.Text}*{boardHeight.Text}*{HandleEmptyText(textBox5.Text)} (mm)", regularfont, XBrushes.Black, new XRect(cur_x_1, cur_y_1, 120, 20), XStringFormats.TopLeft);
             cur_y_1 += 20;
-            gfx.DrawString("②长边允许凸出距离:   50   (mm)", regularfont, XBrushes.Black, new XRect(cur_x_1, cur_y_1, 120, 20), XStringFormats.TopLeft);
+            this.gfx.DrawString($"②长边允许凸出距离:   {HandleEmptyText(boardALeft.Text)}   (mm)", regularfont, XBrushes.Black, new XRect(cur_x_1, cur_y_1, 120, 20), XStringFormats.TopLeft);
             cur_y_1 += 20;
-            gfx.DrawString("③短边允许凸出距离:  -30   (mm)", regularfont, XBrushes.Black, new XRect(cur_x_1, cur_y_1, 120, 20), XStringFormats.TopLeft);
+            this.gfx.DrawString($"③短边允许凸出距离:  {HandleEmptyText(boardATop.Text)}    (mm)", regularfont, XBrushes.Black, new XRect(cur_x_1, cur_y_1, 120, 20), XStringFormats.TopLeft);
             int cur_x_2 = 0 + margin_left_right;
             int cur_y_2 = cur_y_1 + 25;
-            gfx.DrawString("    纸箱参数:", boldfont, XBrushes.Black, new XRect(cur_x_2, cur_y_2, 80, 20), XStringFormats.TopLeft);
+            this.gfx.DrawString("    纸箱参数:", boldfont, XBrushes.Black, new XRect(cur_x_2, cur_y_2, 80, 20), XStringFormats.TopLeft);
             cur_x_2 += 86;
-            gfx.DrawString("①长X宽X高: 25*16*17 (mm)", regularfont, XBrushes.Black, new XRect(cur_x_2, cur_y_2, 120, 20), XStringFormats.TopLeft);
+            this.gfx.DrawString($"①长X宽X高: {boxWdith.Text}*{boxHeight.Text}*{HandleEmptyText(textBox3.Text)} (mm)", regularfont, XBrushes.Black, new XRect(cur_x_2, cur_y_2, 120, 20), XStringFormats.TopLeft);
             int cur_x_3 = 0 + margin_left_right;
             int cur_y_3 = cur_y_2 + 25;
-            gfx.DrawString("摆放图示及坐标参数", boldfont, XBrushes.Black, new XRect(cur_x_3, cur_y_3, 80, 20), XStringFormats.TopLeft);
-            int cur_x_4 = cur_x_3 + 15;
-            int cur_y_4 = cur_y_3 + 25;
-            gfx.DrawString("右板单层图示", boldfont, XBrushes.Black, new XRect(cur_x_4, cur_y_4, 80, 20), XStringFormats.TopLeft);
-            cur_x_4 += 280;
-            gfx.DrawString("右板单层坐标参数", boldfont, XBrushes.Black, new XRect(cur_x_4, cur_y_4, 80, 20), XStringFormats.TopLeft);
-
-            ////一条横线
-            //var line_x = 0 + margin_left_right;
-            //var line_y = cur_y + 40;
-            //XPen pen = new XPen(XColor.FromKnownColor(XKnownColor.Black), 1);
-            //gfx.DrawLine(pen, line_x, line_y, page.Width - line_x, line_y + 2);
-            //if (AList.Any() == true)
-            //{
-            //    cur_x = 0 + margin_left_right;
-            //    cur_y = line_y + 20;
-            //    font = new XFont("华文宋体", 20, XFontStyle.Regular);
-            //    gfx.DrawString("地台板A:", font, XBrushes.Black, new XRect(cur_x, cur_y, page.Width - 2 * cur_x, 40), XStringFormats.TopLeft);
-            //    // 箱子
-            //    var box_x = 0 + margin_left_right;
-            //    cur_y = cur_y + 40;
-            //    font = new XFont("华文宋体", 14, XFontStyle.Regular);
-            //    gfx.DrawString("箱子", font, XBrushes.Black, new XRect(box_x, cur_y, 100, 60), XStringFormats.TopLeft);
-            //    // 坐标轴X
-            //    var point_x_x = 0 + margin_left_right + 40;
-            //    font = new XFont("华文宋体", 14, XFontStyle.Regular);
-            //    gfx.DrawString("坐标轴X", font, XBrushes.Black, new XRect(point_x_x, cur_y, 120, 60), XStringFormats.TopLeft);
-            //    //坐标轴Y
-            //    var point_y_x = 0 + margin_left_right + 100;
-            //    font = new XFont("华文宋体", 14, XFontStyle.Regular);
-            //    gfx.DrawString("坐标轴Y", font, XBrushes.Black, new XRect(point_y_x, cur_y, 120, 60), XStringFormats.TopLeft);
-            //    foreach (var item in AList)
-            //    {
-            //        cur_y = cur_y + 20;
-            //        font = new XFont("华文宋体", 12, XFontStyle.Regular);
-            //        gfx.DrawString((AList.IndexOf(item) + 1).ToString(), font, XBrushes.Black, new XRect(box_x + 10, cur_y, 60, 40), XStringFormats.TopLeft);
-
-            //        font = new XFont("华文宋体", 12, XFontStyle.Regular);
-            //        gfx.DrawString(item.DrawCenterX.ToString(), font, XBrushes.Black, new XRect(point_x_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
-
-            //        font = new XFont("华文宋体", 12, XFontStyle.Regular);
-            //        gfx.DrawString(item.DrawCenterY.ToString(), font, XBrushes.Black, new XRect(point_y_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
-            //    }
-            //}
-            //if (BList.Any() == true)
-            //{
-            //    cur_x = 0 + margin_left_right + 240;
-            //    cur_y = line_y + 20;
-            //    font = new XFont("华文宋体", 20, XFontStyle.Regular);
-            //    gfx.DrawString("地台板B:", font, XBrushes.Black, new XRect(cur_x, cur_y, page.Width - 2 * cur_x, 40), XStringFormats.TopLeft);
-            //    // 箱子
-            //    var box_x = 0 + margin_left_right + 240;
-            //    cur_y = cur_y + 40;
-            //    font = new XFont("华文宋体", 14, XFontStyle.Regular);
-            //    gfx.DrawString("箱子", font, XBrushes.Black, new XRect(box_x, cur_y, 100, 60), XStringFormats.TopLeft);
-            //    // 坐标轴X
-            //    var point_x_x = 0 + margin_left_right + 40 + 240;
-            //    font = new XFont("华文宋体", 14, XFontStyle.Regular);
-            //    gfx.DrawString("坐标轴X", font, XBrushes.Black, new XRect(point_x_x, cur_y, 120, 60), XStringFormats.TopLeft);
-            //    //坐标轴Y
-            //    var point_y_x = 0 + margin_left_right + 100 + 240;
-            //    font = new XFont("华文宋体", 14, XFontStyle.Regular);
-            //    gfx.DrawString("坐标轴Y", font, XBrushes.Black, new XRect(point_y_x, cur_y, 120, 60), XStringFormats.TopLeft);
-            //    foreach (var item in BList)
-            //    {
-            //        cur_y = cur_y + 20;
-            //        font = new XFont("华文宋体", 12, XFontStyle.Regular);
-            //        gfx.DrawString((BList.IndexOf(item) + 1).ToString(), font, XBrushes.Black, new XRect(box_x + 10, cur_y, 60, 40), XStringFormats.TopLeft);
-
-            //        font = new XFont("华文宋体", 12, XFontStyle.Regular);
-            //        gfx.DrawString(item.DrawCenterX.ToString(), font, XBrushes.Black, new XRect(point_x_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
-
-            //        font = new XFont("华文宋体", 12, XFontStyle.Regular);
-            //        gfx.DrawString(item.DrawCenterY.ToString(), font, XBrushes.Black, new XRect(point_y_x + 20, cur_y, 60, 40), XStringFormats.TopLeft);
-            //    }
-            //}
-
+            this.gfx.DrawString("摆放图示及坐标参数", boldfont, XBrushes.Black, new XRect(cur_x_3, cur_y_3, 80, 20), XStringFormats.TopLeft);
+            var t1 = DrawXYPointList(ms1, "右板单层图示", "右板单层坐标参数", cur_y_3, RightSingleList);
+            var c_t1 = CheckOverPageHeight(page, document, t1, RightDoubleList.Count);
+            var t2 = DrawXYPointList(ms2, "右板双层图示", "右板双层坐标参数", c_t1, RightDoubleList);
+            var c_t2 = CheckOverPageHeight(page, document, t2, LeftSingleList.Count);
+            var t3 = DrawXYPointList(ms3, "左板单层图示", "左板单层坐标参数", c_t2, LeftSingleList);
+            var c_t3 = CheckOverPageHeight(page, document, t3, LeftDoubleList.Count);
+            DrawXYPointList(ms4, "左板双层图示", "左板双层坐标参数", c_t3, LeftDoubleList);
             document.Save(filePath);
+        }
+
+        private int CheckOverPageHeight(PdfPage page, PdfDocument document, int point_y, int count)
+        {
+            var calc_height = point_y + 45 + 20 * count;
+            var pageHeight = page.Height.Point;
+
+            if (calc_height > pageHeight)
+            {
+                PdfPage t_page = document.AddPage();
+                this.gfx = XGraphics.FromPdfPage(t_page);
+                return 30;
+            }
+            return point_y;
+        }
+
+        private int DrawXYPointList(MemoryStream mStream, string leftTitle, string rightTitle, int bottom_y, List<ItemInfo> viewList)
+        {
+            XFont boldfont = new XFont("黑体", 12, XFontStyle.Regular);
+            XFont regularfont = new XFont("华文宋体", 12, XFontStyle.Regular);
+            int maxWidth = 260;
+            // 左侧图层标题展示 例：右板单层图示
+            int cur_x = 45;
+            int cur_y = bottom_y + 25;
+            this.gfx.DrawString(leftTitle, boldfont, XBrushes.Black, new XRect(cur_x, cur_y, 80, 20), XStringFormats.TopLeft);
+            // 显示图层
+            XImage img = XImage.FromStream(mStream);
+            var imgWidth = img.PixelWidth > maxWidth ? maxWidth : img.PixelWidth;
+            this.gfx.DrawImage(img, cur_x, cur_y + 20, imgWidth, img.PixelHeight);
+            cur_x += 280;
+            this.gfx.DrawString(rightTitle, boldfont, XBrushes.Black, new XRect(cur_x, cur_y, 80, 20), XStringFormats.TopLeft);
+            var box_x_point = cur_x;
+            var line_y_point = cur_y + 20;
+            // 箱子
+            this.gfx.DrawString("箱子", regularfont, XBrushes.Black, new XRect(box_x_point, line_y_point, 40, 20), XStringFormats.TopCenter);
+            var x_x_point = cur_x + 100;
+            // 坐标轴X
+            this.gfx.DrawString("坐标轴X", regularfont, XBrushes.Black, new XRect(x_x_point, line_y_point, 40, 20), XStringFormats.TopCenter);
+            var y_x_point = cur_x + 200;
+            // 坐标轴Y
+            this.gfx.DrawString("坐标轴Y", regularfont, XBrushes.Black, new XRect(y_x_point, line_y_point, 40, 20), XStringFormats.TopCenter);
+            XPen pen = new XPen(XColor.FromKnownColor(XKnownColor.Black), 1);
+            this.gfx.DrawLine(pen, box_x_point,line_y_point + 20, box_x_point+240, line_y_point + 20);
+
+
+            foreach (var item in viewList)
+            {
+                line_y_point += 20;
+                this.gfx.DrawString((viewList.IndexOf(item) + 1).ToString(), regularfont, XBrushes.Black, new XRect(box_x_point, line_y_point, 40, 20), XStringFormats.Center);
+                this.gfx.DrawString(item.DrawCenterX.ToString(), regularfont, XBrushes.Black, new XRect(x_x_point, line_y_point, 40, 20), XStringFormats.Center);
+                this.gfx.DrawString(item.DrawCenterY.ToString(), regularfont, XBrushes.Black, new XRect(y_x_point, line_y_point, 40, 20), XStringFormats.Center);
+                XPen line_pen = new XPen(XColor.FromKnownColor(XKnownColor.Black), 1);
+                this.gfx.DrawLine(line_pen, box_x_point, line_y_point + 20, box_x_point + 240, line_y_point + 20);
+
+
+            }
+
+            var p_y = line_y_point > (int)(cur_y + 20 + img.PointHeight)? line_y_point : (int)(cur_y + img.PixelHeight + 20);
+            return p_y;
         }
 
         private static DialogResult ShowTips(string message)
@@ -500,52 +509,6 @@ namespace FormControll
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            //Draw3DBoxContainer(e);
-            //Draw3DBoardContainer(e);
-        }
-
-        private void Draw3DBoxContainer(PaintEventArgs e)
-        {
-            Graphics graph = e.Graphics;
-            Rectangle A = new Rectangle(80, 80, 100, 100);
-            Rectangle B = new Rectangle(60, 60, 100, 100);
-            Point[] points = new Point[8];
-            points[0] = new Point(A.Left, A.Top);
-            points[1] = new Point(B.Left, B.Top);
-            points[2] = new Point(A.Right, A.Top);
-            points[3] = new Point(B.Right, B.Top);
-            points[4] = new Point(A.Left, A.Bottom);
-            points[5] = new Point(B.Left, B.Bottom);
-            points[6] = new Point(A.Right, A.Bottom);
-            points[7] = new Point(B.Right, B.Bottom);
-            graph.DrawRectangle(Pens.Black, A);
-            graph.DrawRectangle(Pens.Black, B);
-            graph.DrawLine(Pens.Black, points[0], points[1]);
-            graph.DrawLine(Pens.Black, points[2], points[3]);
-            graph.DrawLine(Pens.Black, points[4], points[5]);
-            graph.DrawLine(Pens.Black, points[6], points[7]);
-        }
-
-        private void Draw3DBoardContainer(PaintEventArgs e)
-        {
-            Graphics graph = e.Graphics;
-            Rectangle A = new Rectangle(60, 400, 120, 30);
-            Rectangle B = new Rectangle(40, 450, 120, 30);
-            Point[] points = new Point[8];
-            points[0] = new Point(A.Left, A.Top);
-            points[1] = new Point(B.Left, B.Top);
-            points[2] = new Point(A.Right, A.Top);
-            points[3] = new Point(B.Right, B.Top);
-            points[4] = new Point(A.Left, A.Bottom);
-            points[5] = new Point(B.Left, B.Bottom);
-            points[6] = new Point(A.Right, A.Bottom);
-            points[7] = new Point(B.Right, B.Bottom);
-            graph.DrawRectangle(Pens.Black, A);
-            graph.DrawRectangle(Pens.Black, B);
-            graph.DrawLine(Pens.Black, points[0], points[1]);
-            graph.DrawLine(Pens.Black, points[2], points[3]);
-            graph.DrawLine(Pens.Black, points[4], points[5]);
-            graph.DrawLine(Pens.Black, points[6], points[7]);
         }
 
         private void label23_Click(object sender, EventArgs e)
@@ -562,6 +525,84 @@ namespace FormControll
 
         private void panel2_Paint_1(object sender, PaintEventArgs e)
         {
+        }
+
+        private void listView3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void boardHeight_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VerifyBoardTop()
+        {
+            if (JudgeInputEmpty()) return;
+
+            var box_width = int.Parse(boxHeight.Text);
+            var box_length = int.Parse(boxWdith.Text);
+            var width_offset = int.Parse(HandleEmptyText(boardATop.Text));
+
+            var minNum = box_width / 5 < box_length / 5 ? box_width / 5 : box_length / 5;
+            if (width_offset > minNum)
+            {
+                ShowTips($"箱子允许超出地台板宽度的距离不超过{minNum}");
+                WidthOffset.Text = string.Empty;
+                boardATop.SelectAll();
+                return;
+            }
+            YOffset = width_offset;
+            WidthOffset.Text = ReturnShowOffsetDistance(boardATop.Text);
+        }
+
+        private void VerifyBoardLeft()
+        {
+
+            if (JudgeInputEmpty()) return;
+          
+            var box_width = int.Parse(boxHeight.Text);
+            var box_length = int.Parse(boxWdith.Text);
+            var length_offset = int.Parse(HandleEmptyText(boardALeft.Text));
+
+            var minNum = box_width / 5 < box_length / 5 ? box_width / 5 : box_length / 5;
+
+            //长边距离和短边距离 min(箱子长的1/5 ，箱子宽的1/5
+            if (length_offset > minNum)
+            {
+                ShowTips($"箱子允许超出地台板长度的距离不超过{minNum}");
+                LengthOffset.Text = string.Empty;
+                boardALeft.SelectAll();
+                return;
+            }
+            XOffset = length_offset;
+            LengthOffset.Text = ReturnShowOffsetDistance(boardALeft.Text);
+        }
+
+        private void boardALeft_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            VerifyBoardLeft();
+        }
+
+        private void boardATop_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            VerifyBoardTop();
+        }
+
+        private void boardALeft_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
